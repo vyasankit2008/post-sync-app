@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,15 +8,23 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
-      transform: true
+      transform: true,
     })
   );
 
-  await app.listen(process.env.PORT || 500);
+  const port = process.env.PORT || 500;
 
-  console.log(
-    `Server running on ${await app.getUrl()}`
-  );
+  await app.listen(port);
+
+  const logger = new Logger('Bootstrap');
+
+  logger.log(`
+    🚀 Application is running!
+
+    🌐 Server: http://localhost:${port}/
+    📚 Environment: ${process.env.NODE_ENV || 'development'}
+    🕒 Started at: ${new Date().toLocaleString()}
+  `);
 }
 
 bootstrap();
