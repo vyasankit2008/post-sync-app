@@ -88,3 +88,49 @@ src
 │
 ├── app.module.ts
 └── main.ts
+
+## API Information
+Base URL : http://localhost:500/
+
+## Available APIs :: 
+
+### 1. Get All Posts : Fetch all posts from the database.
+
+GET http://localhost:500/posts
+
+### 2. Get Posts With Pagination : Fetch posts using page number and limit.
+
+GET http://localhost:500/posts?page=1&limit=10
+
+### 3. Get Sorted Posts : Fetch posts with sorting support.
+
+GET http://localhost:500/posts?sort=id&order=ASC
+
+### 4. Get Posts With Pagination + Sorting : Fetch paginated data with sorting.
+
+GET http://localhost:500/posts?page=1&limit=10&sort=id&order=DESC
+
+## Query Parameters
+
+| Parameter | Description              | Example   |
+| --------- | ------------------------ | --------- |
+| page      | Page number              | page=1    |
+| limit     | Records per page         | limit=10  |
+| sort      | Field name for sorting   | sort=id   |
+| order     | Sorting order (ASC/DESC) | order=ASC |
+
+## Response Example
+
+{
+  "data": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Sample post title",
+      "body": "Sample post body"
+    }
+  ],
+  "total": 100,
+  "page": 1,
+  "limit": 10
+}
